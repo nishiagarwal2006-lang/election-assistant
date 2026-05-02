@@ -4,10 +4,13 @@ emoji: 🗳️
 colorFrom: blue
 colorTo: indigo
 sdk: docker
-pinned: false
 app_port: 7860
+pinned: false
 ---
-# 🗳️ ElectionIQ — AI-Powered Election Process Assistant
+
+# 🗳️ ElectionIQ — AI-Powered Election Assistant
+
+An AI assistant to help citizens understand the election process.
 
 > A smart, interactive AI assistant that helps citizens understand the election process, timelines, and steps clearly.
 
