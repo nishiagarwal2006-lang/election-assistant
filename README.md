@@ -1,3 +1,12 @@
+---
+title: ElectionIQ
+emoji: 🗳️
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+pinned: false
+app_port: 7860
+---
 # 🗳️ ElectionIQ — AI-Powered Election Process Assistant
 
 > A smart, interactive AI assistant that helps citizens understand the election process, timelines, and steps clearly.
