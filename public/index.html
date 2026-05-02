@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ElectionIQ — Your Election Guide</title>
+    <meta name="description" content="AI-powered assistant to help you understand the election process step by step" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+
+    <div class="app-shell">
+
+      <!-- ===== HEADER ===== -->
+      <header class="app-header">
+
+        <a class="logo-wrap" href="/" aria-label="ElectionIQ home">
+          <div class="logo-icon">🗳️</div>
+          <span class="logo-text">Election<span>IQ</span></span>
+        </a>
+
+        <div class="header-center">
+          <div class="header-pill">
+            <span class="live-dot"></span>
+            AI Assistant Online · Nonpartisan
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <select id="languageSelect" class="header-select" aria-label="Select language">
+            <option value="en">🇺🇸 English</option>
+            <option value="hi">🇮🇳 Hindi</option>
+            <option value="es">🇪🇸 Spanish</option>
+            <option value="fr">🇫🇷 French</option>
+            <option value="ar">🇸🇦 Arabic</option>
+            <option value="zh">🇨🇳 Chinese</option>
+            <option value="pt">🇧🇷 Portuguese</option>
+            <option value="sw">🇰🇪 Swahili</option>
+          </select>
+          <select id="userContext" class="header-select" aria-label="I am a...">
+            <option value="">I am a…</option>
+            <option value="first-time voter">First-time voter</option>
+            <option value="returning voter">Returning voter</option>
+            <option value="student researcher">Student researcher</option>
+            <option value="community organizer">Community organizer</option>
+            <option value="election official">Election official</option>
+          </select>
+        </div>
+
+      </header>
+
+      <!-- ===== HERO SEARCH BAND ===== -->
+      <div class="hero-search">
+        <div class="hero-search-inner">
+
+          <div class="hero-text">
+            <span class="hero-badge">🗳️ AI-Powered</span>
+            <h2>What do you want to know about <em>elections</em>?</h2>
+            <p>Ask anything — registration, timelines, ballots, results &amp; more</p>
+          </div>
+
+          <div class="hero-search-bar">
+            <div class="hero-search-wrap">
+              <span class="hero-search-icon">🔍</span>
+              <input
+                type="text"
+                id="heroSearchInput"
+                placeholder="e.g. How do I register to vote? What documents do I need?"
+                aria-label="Search your election question"
+                autocomplete="off"
+              />
+              <button id="heroSearchBtn" aria-label="Ask ElectionIQ">
+                Ask ElectionIQ ➤
+              </button>
+            </div>
+            <div class="hero-suggestions">
+              <span>Try:</span>
+              <button class="hero-chip" data-q="How do I register to vote?">Register to vote</button>
+              <button class="hero-chip" data-q="What is a ballot and how does it work?">How ballots work</button>
+              <button class="hero-chip" data-q="How are election results counted?">Vote counting</button>
+              <button class="hero-chip" data-q="What is an absentee ballot?">Absentee voting</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===== MAIN LAYOUT ===== -->
+      <main class="main-layout">
+
+        <!-- ===== LEFT PANEL ===== -->
+        <aside class="left-panel">
+
+          <section>
+            <h3>🗺️ Voter Journey</h3>
+            <p class="section-subtitle">Click any step to learn more</p>
+            <div class="timeline" id="voterTimeline">
+              <p style="font-size:12px;color:var(--text-muted);padding:10px 0;">Loading journey…</p>
+            </div>
+          </section>
+
+          <section>
+            <h3>📌 Quick Facts</h3>
+            <div class="fact-cards">
+              <div class="fact-card">
+                <span class="fact-icon">⏰</span>
+                <div>
+                  <strong>Register Early</strong>
+                  <p>30–90 days before election</p>
+                </div>
+              </div>
+              <div class="fact-card">
+                <span class="fact-icon">🪪</span>
+                <div>
+                  <strong>Bring Your ID</strong>
+                  <p>Voter ID required at polls</p>
+                </div>
+              </div>
+              <div class="fact-card">
+                <span class="fact-icon">🔒</span>
+                <div>
+                  <strong>Vote is Secret</strong>
+                  <p>Your ballot is confidential</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h3>📰 Election News</h3>
+            <div class="search-bar">
+              <input type="text" id="newsSearch" placeholder="Search election news…" aria-label="Search election news" />
+              <button id="newsSearchBtn" aria-label="Search news">🔍</button>
+            </div>
+            <div id="newsResults" class="news-results">
+              <p class="news-placeholder">Search for the latest election news and updates</p>
+            </div>
+          </section>
+
+        </aside>
+
+        <!-- ===== CENTER CHAT ===== -->
+        <section class="chat-section">
+
+          <div class="chat-header">
+            <div class="assistant-avatar">🤖</div>
+            <div>
+              <h2>Chat with ElectionIQ</h2>
+              <span class="status-indicator">
+                <span class="status-dot"></span>
+                AI Assistant Online
+              </span>
+            </div>
+            <button id="clearChatBtn" class="clear-btn" title="Clear conversation" aria-label="Clear chat history">
+              🗑️ Clear
+            </button>
+          </div>
+
+          <div class="chat-messages" id="chatMessages" role="log" aria-live="polite">
+            <div class="message assistant-message">
+              <div class="message-avatar">🗳️</div>
+              <div class="message-content">
+                <p>👋 Welcome to <strong>ElectionIQ</strong>! I'm your AI guide to understanding everything about elections.</p>
+                <p>Use the <strong>search bar above</strong> or type your question below — I'm here to help!</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="quick-chips" id="quickChips">
+            <p class="chips-label">Quick questions:</p>
+            <div class="chips">
+              <button class="chip" data-question="How do I register to vote?">How do I register?</button>
+              <button class="chip" data-question="What documents do I need to vote?">Documents needed?</button>
+              <button class="chip" data-question="What is a polling station and how do I find mine?">Find polling station</button>
+              <button class="chip" data-question="How are election results counted?">How votes counted?</button>
+              <button class="chip" data-question="What is an absentee ballot?">Absentee voting</button>
+              <button class="chip" data-question="Explain the electoral college">Electoral college</button>
+            </div>
+          </div>
+
+          <div class="chat-input-area">
+            <div class="input-wrapper">
+              <textarea
+                id="chatInput"
+                placeholder="Type your election question here…"
+                rows="1"
+                aria-label="Your message"
+                maxlength="2000"
+              ></textarea>
+              <div class="input-actions">
+                <span class="char-count" id="charCount">0/2000</span>
+                <button id="sendBtn" class="send-btn" aria-label="Send message" disabled>
+                  Send ➤
+                </button>
+              </div>
+            </div>
+            <p class="disclaimer">ℹ️ ElectionIQ is nonpartisan. Always verify with your official election commission.</p>
+          </div>
+
+        </section>
+
+        <!-- ===== RIGHT PANEL ===== -->
+        <aside class="right-panel">
+
+          <section>
+            <h3>❓ Frequently Asked</h3>
+            <div class="faq-list" id="faqList">
+              <p style="font-size:11px;color:var(--text-muted);padding:8px 0;">Loading FAQs…</p>
+            </div>
+          </section>
+
+          <section>
+            <h3>📖 Election Glossary</h3>
+            <div class="glossary-search">
+              <input type="text" id="glossarySearch" placeholder="Search terms…" aria-label="Search glossary" />
+            </div>
+            <div class="glossary-list" id="glossaryList">
+              <p style="font-size:11px;color:var(--text-muted);padding:8px 0;">Loading glossary…</p>
+            </div>
+          </section>
+
+        </aside>
+
+      </main>
+
+    </div><!-- /.app-shell -->
+
+    <!-- ===== MODAL ===== -->
+    <div class="modal-overlay" id="stepModal" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="modal">
+        <button class="modal-close" id="modalClose" aria-label="Close modal">✕</button>
+        <div id="modalContent">
+          <div class="modal-loading">
+            <div class="spinner"></div>
+            <p>Loading details…</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== TOAST ===== -->
+    <div id="toast" class="toast" role="alert" aria-live="assertive"></div>
+
+    <script src="js/app.js"></script>
+
+  </body>
+</html>
